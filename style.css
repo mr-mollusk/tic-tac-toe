@@ -1,91 +1,163 @@
-/* Обнуляющий стиль */
-* {
-    padding: 0;
-    margin: 0;
-    border: 0;
-  }
-  
-  *,
-  *:before,
-  *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  
-  :focus,
-  :active {
-    outline: none;
-  }
-  
-  a:focus,
-  a:active {
-    outline: none;
-  }
-  
-  nav,
-  footer,
-  header,
-  aside {
-    display: block;
-  }
-  
-  html,
-  body {
-    height: 100%;
+.app {
     width: 100%;
-    font-size: 100%;
-    line-height: 1;
-    font-size: 14px;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-  }
-  
-  input,
-  button,
-  textarea {
-    font-family: inherit;
-  }
-  
-  input::-ms-clear {
-    display: none;
-  }
-  
-  button {
-    cursor: pointer;
-  }
-  
-  button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-  }
-  
-  a,
-  a:visited {
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: none;
-  }
-  
-  ul li {
-    list-style: none;
-  }
-  
-  img {
-    vertical-align: top;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: inherit;
-    font-weight: 400;
-  }
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 20px;
+}
 
-  
+.header {
+}
+
+.header__round {
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.header__score {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.body {
+    width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.body__grid {
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+    margin-bottom: 50px;
+    align-items: center;
+    justify-items: center;
+}
+
+.grid__cell {
+    border: black solid 2px;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.grid__cell:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.grid__cell:active {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.title_blocked {
+    cursor: not-allowed;
+}
+
+.title_blocked:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.title_blocked:active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.cross {
+    position: absolute;
+    bottom: 68px;
+    right: 60px;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+
+.cross:before,
+.cross:after {
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    content: " ";
+    height: 100px;
+    width: 4px;
+    background-color: black;
+}
+
+.cross:before {
+    transform: rotate(45deg);
+}
+.cross:after {
+    transform: rotate(-45deg);
+}
+
+.zero {
+    border: 4px black solid;
+    border-radius: 50%;
+    width: 76px;
+    height: 76px;
+    opacity: 0;
+}
+
+.btn {
+    max-width: 400px;
+    min-width: 240px;
+    height: 40px;
+    margin: 0 auto;
+    border: black solid 2px;
+    font-size: 24px;
+    font-weight: 600px;
+    background-color: red;
+    color: white;
+}
+
+.btn:hover {
+    background-color: rgb(155, 0, 0);
+}
+
+.btn:active {
+    background-color: rgb(55, 0, 0);
+}
+
+.grid__cell_1 {
+    margin-right: -4px;
+    margin-bottom: -4px;
+}
+
+.grid__cell_2 {
+    margin-bottom: -4px;
+}
+
+.grid__cell_3 {
+    margin-left: -4px;
+    margin-bottom: -4px;
+}
+
+.grid__cell_4 {
+    margin-right: -4px;
+}
+
+.grid__cell_5 {
+}
+
+.grid__cell_6 {
+    margin-left: -4px;
+}
+
+.grid__cell_7 {
+    margin-right: -4px;
+    margin-top: -4px;
+}
+
+.grid__cell_8 {
+    margin-top: -4px;
+}
+
+.grid__cell_9 {
+    margin-left: -4px;
+    margin-top: -4px;
+}
