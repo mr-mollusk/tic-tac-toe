@@ -48,7 +48,7 @@ const winCheck = (obj) => {
         (obj[0] == true && obj[3] == true && obj[6] == true) ||
         (obj[1] == true && obj[4] == true && obj[7] == true) ||
         (obj[2] == true && obj[5] == true && obj[8] == true) ||
-        (obj[1] == true && obj[4] == true && obj[9] == true) ||
+        (obj[0] == true && obj[4] == true && obj[8] == true) ||
         (obj[2] == true && obj[4] == true && obj[6] == true)
     )
         return true;
