@@ -3,6 +3,8 @@ const titles = document.querySelectorAll(".grid__cell");
 const crosses = document.querySelectorAll(".cross");
 const zeroes = document.querySelectorAll(".zero");
 const restartButton = document.querySelector(".btn");
+const result = document.querySelector('.header__score');
+const titleRound = document.querySelector('.header__round');
 const winCords = [
     [0, 1, 2],
     [3, 4, 5],
@@ -36,6 +38,43 @@ let zeroedTitles = {
     8: false,
     9: false,
 };
+
+const drawResult = () => {
+    const res = localStorage.getItem('result');
+    const round = localStorage.getItem('round');
+    const parsedRound = JSON.parse(round)
+    const parsedResult = JSON.parse(res);
+    const {cross, zero} = parsedResult;
+    if(result){
+        result.innerText = `Крестики ${cross} - ${zero} Нолики`;
+    } 
+    if(titleRound){
+        titleRound.innerText = `Раунд ${parsedRound || 1}`
+    }
+}
+
+const countRound = () => {
+    const round = localStorage.getItem('round')
+    if(round){
+        localStorage.setItem('round', JSON.stringify(JSON.parse(round)++))
+    }else{
+        localStorage.setItem('round', JSON.stringify(2))
+    }
+}
+
+const saveResult = (winner) => {
+    const res = localStorage.getItem('result');
+    if(res){ 
+       const parsedResult = JSON.parse(res);
+       const {cross, zero} = parsedResult;
+       console.log(cross, zero)
+       localStorage.setItem("result", JSON.stringify({cross: +cross + (winner === 'cross' ? 1 : 0), zero: +zero + (winner === 'zero' ? 1 : 0)}))
+    } else {
+        localStorage.setItem("result", JSON.stringify({cross: winner === 'cross' ? 1 : 0, zero: winner === 'zero' ? 1 : 0, }))
+    }
+    countRound();
+    drawResult();
+}
 
 let isCrossesRound = true;
 let isZeroesRound = false;
@@ -78,6 +117,10 @@ const restart = () => {
     });
 };
 
+window.addEventListener('load', () => {
+    drawResult();
+})
+
 /* Функции */
 titles.forEach((title) => {
     title.onclick = () => {
@@ -91,9 +134,11 @@ titles.forEach((title) => {
                 crossedTitles[`${id}`] = true;
                 if (winCheck(crossedTitles)) {
                     alert("Победили крестики");
+                    saveResult('cross')
                     restart();
                 } else if (winCheck(zeroedTitles)) {
                     alert("Победили нолики");
+                    saveResult('zero')
                     restart();
                 } else if (isDraw()) {
                     alert("Ничья");
@@ -108,9 +153,11 @@ titles.forEach((title) => {
                 zeroedTitles[`${id}`] = true;
                 if (winCheck(crossedTitles)) {
                     alert("Победили крестики");
+                    saveResult('cross')
                     restart();
                 } else if (winCheck(zeroedTitles)) {
                     alert("Победили нолики");
+                    saveResult('zero')
                     restart();
                 } else if (isDraw()) {
                     alert("Ничья");
@@ -123,4 +170,6 @@ titles.forEach((title) => {
 
 restartButton.onclick = () => {
     restart();
+    localStorage.clear();
+    drawResult();
 };
