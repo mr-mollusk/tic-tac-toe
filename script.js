@@ -3,16 +3,20 @@ const titles = document.querySelectorAll(".grid__cell");
 const crosses = document.querySelectorAll(".cross");
 const zeroes = document.querySelectorAll(".zero");
 const restartButton = document.querySelector(".btn");
-const winCords = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-];
+
+const roundCounter = document.querySelector(".round__counter");
+const crossCounter = document.querySelector(".cross__counter");
+const zeroCounter = document.querySelector(".zero__counter");
+
+if (roundCounter.textContent == "") roundCounter.textContent = "1";
+if (crossCounter.textContent == "") {
+    crossCounter.textContent = "0";
+    zeroCounter.textContent = "0";
+}
+
+let roundCount = parseInt(roundCounter.textContent);
+let crossCount = parseInt(crossCounter.textContent);
+let zeroCount = parseInt(zeroCounter.textContent);
 
 let crossedTitles = {
     1: false,
@@ -76,6 +80,10 @@ const restart = () => {
         crossedTitles[`${title}`] = false;
         zeroedTitles[`${title}`] = false;
     });
+    roundCount += 1;
+    roundCounter.textContent = `${roundCount}`;
+    crossCounter.textContent = `${crossCount}`;
+    zeroCounter.textContent = `${zeroCount}`;
 };
 
 /* Функции */
@@ -91,9 +99,11 @@ titles.forEach((title) => {
                 crossedTitles[`${id}`] = true;
                 if (winCheck(crossedTitles)) {
                     alert("Победили крестики");
+                    crossCount += 1;
                     restart();
                 } else if (winCheck(zeroedTitles)) {
                     alert("Победили нолики");
+                    zeroCount += 1;
                     restart();
                 } else if (isDraw()) {
                     alert("Ничья");
@@ -108,9 +118,11 @@ titles.forEach((title) => {
                 zeroedTitles[`${id}`] = true;
                 if (winCheck(crossedTitles)) {
                     alert("Победили крестики");
+                    crossCount += 1;
                     restart();
                 } else if (winCheck(zeroedTitles)) {
                     alert("Победили нолики");
+                    zeroCount += 1;
                     restart();
                 } else if (isDraw()) {
                     alert("Ничья");
@@ -123,4 +135,10 @@ titles.forEach((title) => {
 
 restartButton.onclick = () => {
     restart();
+    roundCounter.textContent = "1";
+    crossCounter.textContent = "0";
+    zeroCounter.textContent = "0";
+    roundCount = parseInt(roundCounter.textContent);
+    crossCount = parseInt(crossCounter.textContent);
+    zeroCount = parseInt(zeroCounter.textContent);
 };
